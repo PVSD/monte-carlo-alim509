@@ -14,6 +14,8 @@ public class MonteCarlo {
     public double a;
     public double b;
 
+    private Random rndm = new Random();
+
     public MonteCarlo (double midWidth, double midHeight, double radius) {
         h = midWidth;
         k = midHeight;
@@ -23,20 +25,18 @@ public class MonteCarlo {
         height = 2 * midHeight;
     }
 
-    private Random rndm = new Random();
-
     public double nextRainDrop_x() {
-        a = rndm.nextDouble() * (width) + (h + r - (2 * h));
+        a = (rndm.nextDouble() * (2*r)) + (h);
         return a;
     }
 
     public double nextRainDrop_y() {
-        b = rndm.nextDouble() * (height) + (k + r) - (2 * h);
+        b = (rndm.nextDouble() * (2*r)) + (k);
         return b;
     }
 
     public boolean insideCircle(double x, double y) {
-        if ((((x - h) * (x - h)) + ((y - k) * (y - k))) <= (r * r)) {
+        if ((((x - h) * (x - h)) + ((y - k) * (y - k))) >= (r * r)) {
             return true;
         } else {
             return false;
